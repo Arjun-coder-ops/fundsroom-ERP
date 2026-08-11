@@ -1,0 +1,13 @@
+{
+  "rewrites": [
+    { "source": "/", "destination": "/index.html" },
+    { "source": "/login", "destination": "/index.html" },
+    { "source": "/dashboard", "destination": "/index.html" },
+    { "source": "/customers", "destination": "/index.html" },
+    { "source": "/customers/:path*", "destination": "/index.html" },
+    { "source": "/products", "destination": "/index.html" },
+    { "source": "/inventory", "destination": "/index.html" },
+    { "source": "/challans", "destination": "/index.html" },
+    { "source": "/challans/:path*", "destination": "/index.html" }
+  ]
+}
