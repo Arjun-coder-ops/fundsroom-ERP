@@ -9,8 +9,8 @@ on:
       - main
 
 jobs:
-  ci:
-    name: FundsRoom ERP CI
+  build:
+    name: FundsRoom ERP Build
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
