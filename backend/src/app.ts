@@ -11,22 +11,31 @@ import dashboardRoutes from './routes/dashboard.routes';
 export function createApp() {
   const app = express();
 
-  const allowedOrigins = env.clientUrl.split(',').map((origin) => origin.trim());
-
-  app.use(
-    cors({
-      origin: (origin, callback) => {
-        if (!origin || allowedOrigins.includes(origin)) {
-          callback(null, true);
-        } else {
-          callback(new Error(`CORS origin denied: ${origin}`));
-        }
-      },
-      credentials: true,
-    }),
-  );
+  if (env.nodeEnv !== 'production') {
+    app.use(
+      cors({
+        origin: true,
+        credentials: true,
+      }),
+    );
+  } else {
+    const allowedOrigins = new Set(env.clientUrl.split(',').map((origin) => origin.trim()));
+    app.use(
+      cors({
+        origin: (origin, callback) => {
+          if (!origin || allowedOrigins.has(origin)) {
+            callback(null, true);
+          } else {
+            callback(new Error(`CORS origin denied: ${origin}`));
+          }
+        },
+        credentials: true,
+      }),
+    );
+  }
   app.use(express.json());
 
+  app.get('/', (_req, res) => res.json({ success: true, data: { message: 'Fundsroom ERP API is running' } }));
   app.get('/health', (_req, res) => res.json({ success: true, data: { status: 'ok' } }));
 
   app.use('/api/auth', authRoutes);
