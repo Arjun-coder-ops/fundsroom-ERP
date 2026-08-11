@@ -7,8 +7,8 @@ import Banner from '../components/Banner';
 export default function Login() {
   const { login } = useAuth();
   const navigate = useNavigate();
-  const [email, setEmail] = useState('admin@fundsroom.test');
-  const [password, setPassword] = useState('Password123!');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
   const [error, setError] = useState('');
   const [submitting, setSubmitting] = useState(false);
 
@@ -51,13 +51,6 @@ export default function Login() {
             {submitting ? 'Signing in...' : 'Sign in'}
           </button>
         </form>
-        <div className="demo-creds">
-          <strong>Demo accounts</strong> (password: Password123!)
-          <br />
-          admin@fundsroom.test · sales@fundsroom.test
-          <br />
-          warehouse@fundsroom.test · accounts@fundsroom.test
-        </div>
       </div>
     </div>
   );
